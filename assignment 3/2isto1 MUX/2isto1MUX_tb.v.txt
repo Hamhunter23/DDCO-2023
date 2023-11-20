@@ -1,0 +1,39 @@
+module testbench;
+
+reg A,B,S;
+wire X;
+
+initial
+begin
+$dumpfile("MUX2isto1_test.vcd");
+$dumpvars(0,testbench);
+end
+
+mux2 newMUX(.a(A), .b(B), .x(S), .o(X));
+
+initial
+begin
+S = 1'b0;A = 1'b0;B = 1'b0;
+#5 S = 1'b0;A = 1'b0;B = 1'b1;
+#5 S = 1'b0;A = 1'b1;B = 1'b0;
+#5 S = 1'b0;A = 1'b1;B = 1'b1;
+#5 S = 1'b1;A = 1'b0;B = 1'b0;
+#5 S = 1'b1;A = 1'b0;B = 1'b1;
+#5 S = 1'b1;A = 1'b1;B = 1'b0;
+#5 S=1'b1;A = 1'b1;B = 1'b1;
+end
+
+initial
+begin
+$monitor($time, "S=%b, A=%b, B=%b, X=%b", S,A,B,X);
+   S = 1'b0;A = 1'b0;B = 1'b0;
+#5 S = 1'b0;A = 1'b0;B = 1'b1;
+#5 S = 1'b0;A = 1'b1;B = 1'b0;
+#5 S = 1'b0;A = 1'b1;B = 1'b1;
+#5 S = 1'b1;A = 1'b0;B = 1'b0;
+#5 S = 1'b1;A = 1'b0;B = 1'b1;
+#5 S = 1'b1;A = 1'b1;B = 1'b0;
+#5 S = 1'b1;A = 1'b1;B = 1'b1;
+end
+
+endmodule

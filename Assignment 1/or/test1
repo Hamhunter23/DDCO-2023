@@ -1,0 +1,53 @@
+#! /c/iverilog/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_010F0F70 .scope module, "orgate_tb" "orgate_tb" 2 1;
+ .timescale 0 0;
+v010F4A00_0 .var "a", 0 0;
+v011337D8_0 .var "b", 0 0;
+v01133830_0 .net "y", 0 0, L_010F1080; 1 drivers
+S_010F0FF8 .scope module, "test" "andgate" 2 6, 3 1, S_010F0F70;
+ .timescale 0 0;
+L_010F1080 .functor OR 1, v010F4A00_0, v011337D8_0, C4<0>, C4<0>;
+v010F48F8_0 .net "a", 0 0, v010F4A00_0; 1 drivers
+v010F4950_0 .net "b", 0 0, v011337D8_0; 1 drivers
+v010F49A8_0 .alias "y", 0 0, v01133830_0;
+    .scope S_010F0F70;
+T_0 ;
+    %delay 0, 0;
+    %set/v v010F4A00_0, 0, 1;
+    %set/v v011337D8_0, 0, 1;
+    %delay 10, 0;
+    %set/v v010F4A00_0, 1, 1;
+    %set/v v011337D8_0, 0, 1;
+    %delay 10, 0;
+    %set/v v010F4A00_0, 0, 1;
+    %set/v v011337D8_0, 1, 1;
+    %delay 10, 0;
+    %set/v v010F4A00_0, 1, 1;
+    %set/v v011337D8_0, 1, 1;
+    %delay 10, 0;
+    %set/v v010F4A00_0, 0, 1;
+    %set/v v011337D8_0, 0, 1;
+    %end;
+    .thread T_0;
+    .scope S_010F0F70;
+T_1 ;
+    %vpi_call 2 19 "$monitor", $time, "a=%b, b=%b,y=%b", v010F4A00_0, v011337D8_0, v01133830_0;
+    %end;
+    .thread T_1;
+    .scope S_010F0F70;
+T_2 ;
+    %vpi_call 2 24 "$dumpfile", "orgate.vcd";
+    %vpi_call 2 25 "$dumpvars", 1'sb0, S_010F0FF8;
+    %end;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "orgate_tb.v.txt";
+    "orgate.v.txt";

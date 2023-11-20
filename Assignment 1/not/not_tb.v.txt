@@ -1,0 +1,24 @@
+module notgate_tb;
+reg a;
+wire y;
+
+notgate test(y, a);
+initial
+begin 
+    #0 a = 0;
+    #10 a = 1;
+    #10 a = 0;
+end
+
+initial
+begin
+    $monitor($time,"a = %b, y = %b", a, y);
+end
+
+initial
+begin
+    $dumpfile("notgate.vcd");
+    $dumpvars(0, test);
+end
+
+endmodule

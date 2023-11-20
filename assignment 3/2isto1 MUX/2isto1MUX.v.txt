@@ -1,0 +1,3 @@
+module mux2 (input wire a, b, x, output wire o);
+assign o = (a & (~x))+(b & x);
+endmodule

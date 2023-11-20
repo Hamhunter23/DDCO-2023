@@ -1,0 +1,11 @@
+module fulladd(input wire a,b,c,output wire sum,cout);
+wire [4:0] t;
+
+and a1(t[1],a,b);
+and a2(t[2],a,c);
+and a3(t[3],b,c);
+or o1(t[4],t[1],t[2]);
+or o2(cout,t[3],t[4]);
+xor x1(t[0],a,b);
+xor x2(sum,t[0],c);
+endmodule

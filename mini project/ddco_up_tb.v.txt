@@ -1,0 +1,33 @@
+module up_counter_testbench;
+
+reg clk, reset;
+wire [2:0] count;
+
+up_counter dut (
+  .clk(clk),
+  .reset(reset),
+  .count(count)
+);
+
+initial begin
+  clk = 0;
+  reset = 1;
+
+  #20;
+  reset = 0;
+
+  #100;
+
+  $finish;
+end
+
+always begin
+  #5 clk = ~clk;
+end
+
+initial begin
+  $dumpfile("up_counter.vcd");
+  $dumpvars(0,up_counter_testbench);
+end
+
+endmodule

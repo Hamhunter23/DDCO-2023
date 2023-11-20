@@ -1,0 +1,35 @@
+$date
+	Wed Aug 16 16:24:20 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module orgate_tb $end
+$scope module test $end
+$var wire 1 ! a $end
+$var wire 1 " b $end
+$var wire 1 # y $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0#
+0"
+0!
+$end
+#10
+1#
+1!
+#20
+1"
+0!
+#30
+1!
+#40
+0#
+0"
+0!

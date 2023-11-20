@@ -1,0 +1,77 @@
+#! /c/iverilog/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision - 12;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_01153468 .scope module, "tb_up_down_counter" "tb_up_down_counter" 2 3;
+ .timescale -9 -12;
+v010A10A8_0 .var "clk", 0 0;
+v010A1100_0 .net "count", 2 0, v01154580_0; 1 drivers
+v010A1158_0 .var "rst", 0 0;
+v010A11B0_0 .var "up_down", 0 0;
+S_011544A0 .scope module, "u1" "up_down_counter" 2 10, 3 1, S_01153468;
+ .timescale 0 0;
+v01154528_0 .net "clk", 0 0, v010A10A8_0; 1 drivers
+v01154580_0 .var "count", 2 0;
+v0115EF50_0 .net "rst", 0 0, v010A1158_0; 1 drivers
+v010A1050_0 .net "up_down", 0 0, v010A11B0_0; 1 drivers
+E_01081D90 .event posedge, v0115EF50_0, v01154528_0;
+    .scope S_011544A0;
+T_0 ;
+    %wait E_01081D90;
+    %load/v 8, v0115EF50_0, 1;
+    %jmp/0xz  T_0.0, 8;
+    %ix/load 0, 3, 0;
+    %assign/v0 v01154580_0, 0, 0;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/v 8, v010A1050_0, 1;
+    %jmp/0xz  T_0.2, 8;
+    %load/v 8, v01154580_0, 3;
+    %mov 11, 0, 29;
+    %addi 8, 1, 32;
+    %ix/load 0, 3, 0;
+    %assign/v0 v01154580_0, 0, 8;
+    %jmp T_0.3;
+T_0.2 ;
+    %load/v 8, v01154580_0, 3;
+    %mov 11, 0, 29;
+    %subi 8, 1, 32;
+    %ix/load 0, 3, 0;
+    %assign/v0 v01154580_0, 0, 8;
+T_0.3 ;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_01153468;
+T_1 ;
+    %set/v v010A10A8_0, 0, 1;
+    %set/v v010A1158_0, 1, 1;
+    %set/v v010A11B0_0, 0, 1;
+    %vpi_call 2 24 "$dumpfile", "tb_up_down_counter.vcd";
+    %vpi_call 2 25 "$dumpvars", 1'sb0, S_01153468;
+    %delay 10000, 0;
+    %set/v v010A1158_0, 0, 1;
+    %delay 10000, 0;
+    %set/v v010A11B0_0, 1, 1;
+    %delay 100000, 0;
+    %set/v v010A11B0_0, 0, 1;
+    %delay 100000, 0;
+    %vpi_call 2 40 "$finish";
+    %end;
+    .thread T_1;
+    .scope S_01153468;
+T_2 ;
+    %delay 5000, 0;
+    %load/v 8, v010A10A8_0, 1;
+    %inv 8, 1;
+    %set/v v010A10A8_0, 8, 1;
+    %jmp T_2;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "ddcoup_tb.v";
+    "ddcoup.v";
